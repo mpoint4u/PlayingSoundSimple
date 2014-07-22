@@ -3,12 +3,12 @@
 	<!-- NMML reference: https://gist.github.com/1763850 -->
 	
 	<!-- metadata, make sure 'package' is at least 3 segments (ie. com.mycompany.myproject) -->
-	<meta title="PlayingSoundSimple" package="PlayingSoundSimple" version="1.0.0" company="pm" />
+	<meta title="PlayingSoundSimple" package="at.mpoint.PlayingSoundSimple" version="1.0.0" company="pm" />
 	
 	<!-- output -->
 	<app main="Main" file="PlayingSoundSimple" path="bin" />
 	
-	<window background="#000000" fps="60" />
+	<window background="#777777" fps="60" />
 	<window width="800" height="480" unless="mobile" />
 	<window orientation="landscape" vsync="false" antialiasing="0" if="cpp" />
 	
@@ -19,7 +19,10 @@
 	
 	<!-- assets -->
 	<icon path="assets/openfl.svg" />
-	<assets path="assets/img" rename="img" />
+	
+<!--	<assets path="assets/img" rename="img" />-->
+
+	<assets path="assets" exclude="*.svg" />
 	
 	<!-- optimize output
 	<haxeflag name="-dce full" /> -->
