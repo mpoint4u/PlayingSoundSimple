@@ -34,3 +34,22 @@ Icon
 # Files that might appear on external disk
 .Spotlight-V100
 .Trashes
+
+# added by pm
+.gitignore
+.DS_Store
+tmp/*
+log/*
+bin/*
+Export/*
+assets/data/db/*
+*readme.txt
+*.hxproj
+*.tmproj
+start_haxebuilder.bat
+project.hide
+.idea/*
+*.iml
+*.zip
+*.rar
+
