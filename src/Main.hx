@@ -33,7 +33,7 @@ class Main extends Sprite {
 		addChild (background);
 		
 		#if flash
-		sound = Assets.getSound ("assets/testsound.mp3");
+		sound = Assets.getSound ("assets/testsound.wav");
 		#else
 		sound = Assets.getSound ("assets/testsound.ogg");
 		#end
