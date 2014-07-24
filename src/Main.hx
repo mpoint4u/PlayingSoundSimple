@@ -6,9 +6,7 @@ import flash.events.Event;
 import flash.events.MouseEvent;
 import flash.media.Sound;
 import flash.media.SoundChannel;
-import flash.media.SoundTransform;
-//import motion.Actuate;
-//import motion.easing.Quad;
+//import flash.media.SoundTransform;
 import openfl.Assets;
 
 
@@ -26,20 +24,18 @@ class Main extends Sprite {
 		
 		super ();
 		
-		// Actuate.defaultEase = Quad.easeOut;
-		
 		background = new Sprite ();
 		background.graphics.beginFill (0x3CB878);
-		background.graphics.drawRect (0, 0, stage.stageWidth * 0.8, stage.stageHeight * 0.8);
+		background.graphics.drawRect (0, 0, stage.stageWidth * 0.5, stage.stageHeight * 0.5);
 		background.alpha = 0.5;
 		background.buttonMode = true;
 		background.addEventListener (MouseEvent.MOUSE_DOWN, this_onMouseDown);
 		addChild (background);
 		
 		#if flash
-		sound = Assets.getSound ("assets/stars.mp3");
+		sound = Assets.getSound ("assets/testsound.mp3");
 		#else
-		sound = Assets.getSound ("assets/stars.ogg");
+		sound = Assets.getSound ("assets/testsound.ogg");
 		#end
 		
 		position = 0;
@@ -49,50 +45,30 @@ class Main extends Sprite {
 	}
 	
 	
-	private function pause (fadeOut:Float = 1.2):Void {
+	private function pause ():Void {
 
 		trace("private function pause() was called ... ");
 
 		if (playing) {
 			
-			playing = false;
-			
-			// Actuate.transform (channel, fadeOut).sound (0, 0).onComplete (function () {
-				
-				position = channel.position;
-				channel.removeEventListener (Event.SOUND_COMPLETE, channel_onSoundComplete);
-				channel.stop ();
-				channel = null;
-				
-			// });
-			
-			// Actuate.tween (background, fadeOut, { alpha: 0.1 });
-			
+			playing = false;	
+			position = channel.position;
+			channel.removeEventListener (Event.SOUND_COMPLETE, channel_onSoundComplete);
+			channel.stop ();
+			channel = null;
 		}
 		
 	}
 	
 	
-	private function play (fadeIn:Float = 3):Void {
+	private function play ():Void {
 
 		trace("private function play() was called ... ");
 		
 		playing = true;
-		
-// 		if (fadeIn <= 0) {
-			
-			channel = sound.play (position);
-			
-/*		} else {
-			
-			channel = sound.play (position, 0, new SoundTransform (0, 0));
-			Actuate.transform (channel, fadeIn).sound (1, 0);
-			
-		}*/
-		
-		channel.addEventListener (Event.SOUND_COMPLETE, channel_onSoundComplete);
-		// Actuate.tween (background, fadeIn, { alpha: 1 });
-		
+
+		channel = sound.play (position);	
+		channel.addEventListener (Event.SOUND_COMPLETE, channel_onSoundComplete);		
 	}
 	
 	
