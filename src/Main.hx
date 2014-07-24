@@ -7,8 +7,8 @@ import flash.events.MouseEvent;
 import flash.media.Sound;
 import flash.media.SoundChannel;
 import flash.media.SoundTransform;
-import motion.Actuate;
-import motion.easing.Quad;
+//import motion.Actuate;
+//import motion.easing.Quad;
 import openfl.Assets;
 
 
@@ -26,12 +26,12 @@ class Main extends Sprite {
 		
 		super ();
 		
-		Actuate.defaultEase = Quad.easeOut;
+		// Actuate.defaultEase = Quad.easeOut;
 		
 		background = new Sprite ();
 		background.graphics.beginFill (0x3CB878);
-		background.graphics.drawRect (0, 0, stage.stageWidth, stage.stageHeight);
-		background.alpha = 0.1;
+		background.graphics.drawRect (0, 0, stage.stageWidth * 0.8, stage.stageHeight * 0.8);
+		background.alpha = 0.5;
 		background.buttonMode = true;
 		background.addEventListener (MouseEvent.MOUSE_DOWN, this_onMouseDown);
 		addChild (background);
@@ -50,21 +50,23 @@ class Main extends Sprite {
 	
 	
 	private function pause (fadeOut:Float = 1.2):Void {
-		
+
+		trace("private function pause() was called ... ");
+
 		if (playing) {
 			
 			playing = false;
 			
-			Actuate.transform (channel, fadeOut).sound (0, 0).onComplete (function () {
+			// Actuate.transform (channel, fadeOut).sound (0, 0).onComplete (function () {
 				
 				position = channel.position;
 				channel.removeEventListener (Event.SOUND_COMPLETE, channel_onSoundComplete);
 				channel.stop ();
 				channel = null;
 				
-			});
+			// });
 			
-			Actuate.tween (background, fadeOut, { alpha: 0.1 });
+			// Actuate.tween (background, fadeOut, { alpha: 0.1 });
 			
 		}
 		
@@ -72,22 +74,24 @@ class Main extends Sprite {
 	
 	
 	private function play (fadeIn:Float = 3):Void {
+
+		trace("private function play() was called ... ");
 		
 		playing = true;
 		
-		if (fadeIn <= 0) {
+// 		if (fadeIn <= 0) {
 			
 			channel = sound.play (position);
 			
-		} else {
+/*		} else {
 			
 			channel = sound.play (position, 0, new SoundTransform (0, 0));
 			Actuate.transform (channel, fadeIn).sound (1, 0);
 			
-		}
+		}*/
 		
 		channel.addEventListener (Event.SOUND_COMPLETE, channel_onSoundComplete);
-		Actuate.tween (background, fadeIn, { alpha: 1 });
+		// Actuate.tween (background, fadeIn, { alpha: 1 });
 		
 	}
 	
@@ -95,9 +99,6 @@ class Main extends Sprite {
 	
 	
 	// Event Handlers
-	
-	
-	
 	
 	private function channel_onSoundComplete (event:Event):Void {
 		
@@ -117,9 +118,6 @@ class Main extends Sprite {
 			
 			pause ();
 			
-		}
-		
-	}
-	
-	
+		}	
+	}	
 }
